@@ -1,0 +1,803 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title> Social Media WebApplication  </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+    <style>
+        @*.photos {
+            list-style: none;
+            padding: 0;
+        }
+
+        .post-item {
+            display: inline-block;
+            margin: 10px;
+            position: relative;
+        }
+
+            .post-item img {
+                width: 212px;
+                height: 212px;
+                object-fit: cover;
+            }
+
+        .post-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: white;
+        }
+
+            .post-icon:hover {
+                color: yellow;
+            }
+
+        .error-message {
+            color: red;
+            display: none;
+        }*@
+
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .error-message {
+            color: red;
+            display: none;
+        }
+
+        .control-label {
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .name-input {
+            display: block;
+            margin-top: 5px;
+        }
+    </style>
+    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
+
+    <link rel="stylesheet" href="~/Css/main.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/color.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <link href="~/Css/AboutPage.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+
+    <script src="~/JavaScript/HomePage.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="~/JavaScript/HomePage.js"></script>
+</head>
+<body>
+    <div class="theme-layout">
+
+        <div class="responsive-header">
+            <div class="mh-head first Sticky">
+                <span class="mh-btns-left">
+                    <a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
+                </span>
+                <span class="mh-text">
+                    <a href="newsfeed.html" title=""><img src="~/images/logo2.png" alt=""></a>
+                </span>
+                <span class="mh-btns-right">
+                    <a class="fa fa-sliders" href="#shoppingbag"></a>
+                </span>
+            </div>
+            <div class="mh-head second">
+                <form class="mh-form" id="mh-form">
+                    <input placeholder="search" />
+                    <a href="#/" class="fa fa-search"></a>
+                </form>
+            </div>
+        </div><!-- responsive header -->
+
+        <div class="topbar stick">
+            <div class="logo">
+                <a title="" href="/Login/HomePage">
+                    Back
+                    @*<img src="~/images/pexels-pixabay-462162.jpg" alt="" height="95" width="34">*@
+                </a>
+            </div>
+
+            <div class="top-area">
+                <div class="user-img">
+                    @* <img src="~/images/download.jpg" alt="" height="31" width="31">*@
+                    <span class="status f-online"></span>
+                    <div class="user-setting">
+                        <a href="#" title="" id="logoutButton"><i class="fa-solid fa-arrow-right-from-bracket"></i>Log out</a>
+                    </div>
+                </div>
+            </div>
+        </div><!-- topbar -->
+
+        <section>
+            <div class="feature-photo">
+                <figure>
+                    @*<img src="~/images/resources/timeline-1.jpg" alt="">*@
+                    <div id="yourContainer">
+                        @*                        <img src="~/images/pexels-pixabay-462162.jpg" />
+                        *@                      @*  <img src="~/images/1080x360.jpg" />*@
+                    </div>
+                </figure>
+                <div class="container-fluid">
+                    <div class="row merged">
+                        <div class="col-lg-2 col-sm-3">
+                            <div class="user-avatar">
+                                <figure>
+                                    <img src="" id="ProfilePhoto" alt="">
+                                    <form id="uploadForm" enctype="multipart/form-data">
+                                        <label for="fileInput" class="fileContainer">
+                                            Edit Display Photo
+                                            <input type="file" id="fileInput" onchange="uploadProfilePhoto()" name="fileInput" accept="image/*" />
+                                        </label>
+                                        @* <button type="button" onchange="uploadFile()">Upload Photo</button>*@
+                                    </form>
+
+
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="col-lg-10 col-sm-9">
+                            <div class="timeline-info">
+                                <ul>
+                                    <li class="admin-name">
+                                        <h3 id="UserName"></h3>
+                                        
+                                        
+                                    </li>
+                                    <li>
+                                        <a class="active" id="timeline-link" title="" data-ripple=""> Personal Info</a>
+                                        <a class="" id="editinfo-link" title="" data-ripple="">Edit Info</a>
+
+                                        @* <a class="" id="changepassword-link" title="" data-ripple="">Change Password</a>*@
+
+                                        <a class="" id="followers-link" title="" data-ripple="">Friends</a>
+
+                                        <a class="" id="post-link" title="" data-ripple="">Post</a>
+
+                                        <a class="" id="archievelink" title="" data-ripple="">Archieve Post</a>
+
+
+
+
+                                        @* <a class="" id="following-link" title="" data-ripple="">Following</a>*@
+
+
+                                        @*<a href="#activities" data-toggle="tab">ACTIVITIES</a>*@
+                                        @* <a href="#followers" data-toggle="tab">FOLLOWERS</a>
+                                            <a href="#following" data-toggle="tab">FOLLOWING</a>*@
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- top area -->
+
+        <section>
+            <div class="gap gray-bg">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row" id="page-contents">
+                                <div class="col-lg-3">
+
+                                </div><!-- sidebar -->
+                                <div class="col-lg-6">
+                                    <div class="central-meta">
+                                        <!-- About Div -->
+                                        <div id="timeline-div">
+                                            <div class="about">
+                                                <div class="personal">
+                                                    <h5 class="f-title"><i class="fa fa-address-book"></i> Personal Info</h5>
+
+                                                </div>
+                                                <div class="d-flex flex-row mt-2">
+                                                    <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left">
+                                                        <li class="nav-item">
+                                                            <a href="#basic" class="nav-link active" data-toggle="tab">Basic info</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a href="#interest" class="nav-link" data-toggle="tab">interests</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a href="#Bio" class="nav-link" data-toggle="tab">Bio</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane fade show active" id="basic">
+                                                            <ul class="basics">
+                                                                @*  <li id="UserName"><i class="fa-regular fa-user"></i></li>*@
+                                                                <li id="City">
+                                                                <i class="fa-solid fa-city"></i></li>
+
+                                                                <li id="PhoneNumber"><i class="fa-solid fa-phone"></i></li>
+                                                                <li id="Email"><i class="fa-solid fa-envelope"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="interest" role="tabpanel">
+                                                            <ul class="basics" id="interestdata">
+                                                            </ul>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="Bio" role="tabpanel">
+                                                            <ul class="basics" id="BioInfo">
+                                                            </ul>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                @* <div class="section">
+                    <h3>Statistics</h3>
+                    <span class="badge">12</span><span class="inline-text">Followers</span>
+                    <span class="badge">2</span><span class="inline-text">Following</span>
+
+
+                </div>*@
+                                            </div>
+                                        </div>
+
+                                        <!-- edit info -->
+
+                                        <div id="editinfo-div" style="display: none;">
+                                            <div class="editing-info" id="UserProfileDiv">
+                                                <h5 class="f-title"><i class="fa-solid fa-user"></i> Edit User Profile</h5>
+
+                                                <form id="myForm" method="post">
+
+                                                    <div class="form-group" hidden>
+                                                        <input type="text" id="TxtUserId" required="required" />
+                                                        <label class="control-label" for="LastName">userid</label><i class="mtrl-select"></i>
+                                                    </div>
+                                                    <div class="form-group" hidden>
+                                                        <input type="text" id="TxtUserPassword" />
+                                                        <label class="control-label" for="LastName">userPassword</label><i class="mtrl-select"></i>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <input type="text" id="TxtFirstName" class="name-input" required="required" />
+                                                        <label class="control-label" for="FirstName" style="font-size:10px; font-weight: bold;">First Name</label>
+                                                        <i class="mtrl-select"></i>
+                                                        <span class="error-message" id="firstNameError" style="color: red; display: none;">First Name should only contain alphabetic characters.</span>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <input type="text" id="TxtLastName" class="name-input" required="required" />
+                                                        <label class="control-label" for="LastName" style="font-size: 10px; font-weight: bold;">Last Name</label>
+                                                        <i class="mtrl-select"></i>
+                                                        <span class="error-message" id="lastNameError" style="color: red; display: none;">Last Name should only contain alphabetic characters.</span>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <input type="text" id="TxtCity" required="required" />
+                                                        <label class="control-label" for="City" style="font-size: 10px; font-weight: bold;">City</label>
+                                                        <i class="mtrl-select"></i>
+                                                        <span class="error-message" id="cityError" style="color: red; display: none;">City is required.</span>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <input type="email" id="TxtEmail" required="required" />
+                                                        <label class="control-label" for="Email" style="font-size: 10px; font-weight: bold;">Email</label>
+                                                        <i class="mtrl-select"></i>
+                                                        <span class="error-message" id="emailError" style="color: red; display: none;">Valid Email is required.</span>
+                                                    </div>
+
+                                                    <!-- Gender -->
+                                                    <label class="form-group">Gender: </label>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="Male" required>
+                                                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="Female">
+                                                        <label class="form-check-label" for="inlineRadio2">Female</label>
+                                                    </div>
+                                                    <br />
+
+                                                    <!-- Interests -->
+                                                    <label class="form-group">Interests: </label>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" name="Interests" value="Dance">
+                                                        <label class="form-check-label" for="inlineCheckbox1">Dance</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" name="Interests" value="singing">
+                                                        <label class="form-check-label" for="inlineCheckbox2">singing</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" name="Interests" value="Drawing">
+                                                        <label class="form-check-label" for="inlineCheckbox1">Drawing</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" name="Interests" value="Painting">
+                                                        <label class="form-check-label" for="inlineCheckbox2">Painting</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" name="Interests" value="Acting">
+                                                        <label class="form-check-label" for="inlineCheckbox1">Acting</label>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <input type="tel" id="TxtPhoneNumber" required="required" pattern="[0-9]{10,12}" />
+                                                        <label class="control-label" for="PhoneNumber" style="font-size: 10px; font-weight: bold;">Phone Number</label>
+                                                        <i class="mtrl-select"></i>
+                                                        <span class="error-message" id="phoneError" style="color: red; display: none;">Phone Number should be 10 to 12 digits long.</span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" id="TxtBio" />
+                                                        <label class="control-label" for="Bio" style="font-size: 10px; font-weight: bold;">Bio</label><i class="mtrl-select"></i>
+                                                    </div>
+
+                                                  @*  <div class="form-group">
+                                                        <input type="date" id="BirthDate" required="required" />
+                                                        <label class="control-label" for="BirthDate" style="font-size: 10px; font-weight: bold;">Birth Date</label><i class="mtrl-select"></i>
+                                                        <span class="error-message" id="birthDateError" style="color: red; display: none;">Birth Date is required.</span>
+                                                    </div>*@
+                                                    <span id="NewloginError" style="color: red;"></span><br />
+
+                                                    <div class="submit-btns">
+                                                        <button type="button" class="mtr-btn"><span>Cancel</span></button>
+                                                        <button type="button" id="updateButton" class="mtr-btn"><span>Update</span></button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        <script>
+   
+                                        </script>
+
+
+
+                                        <!--  change password -->
+                                        <div id="changepassword-div" style="display: none;">
+                                            <div class="editing-info">
+                                                <h5 class="f-title"><i class="ti-lock"></i>Change Password</h5>
+
+                                                <form method="post">
+                                                    <div class="form-group">
+                                                        <input type="password" id="input" required="required" />
+                                                        <label class="control-label" for="input">New password</label><i class="mtrl-select"></i>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="password" required="required" />
+                                                        <label class="control-label" for="input">Confirm password</label><i class="mtrl-select"></i>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="password" required="required" />
+                                                        <label class="control-label" for="input">Current password</label><i class="mtrl-select"></i>
+                                                    </div>
+                                                    <a class="forgot-pwd underline" title="" href="#">Forgot Password?</a>
+                                                    <div class="submit-btns">
+                                                        <button type="button" class="mtr-btn"><span>Cancel</span></button>
+                                                        <button type="button" id="changePasswordButton" class="mtr-btn"><span>Change</span></button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!--Followers-->
+                                        @* <div id="followers-div" style="display: none;">
+
+
+                <h1>User List</h1>
+                <ul id="userList" class="list-unstyled">
+                     User list items will be dynamically populated here
+                </ul>
+
+
+
+        </div>*@
+
+                                        @*<div id="followers-div" style="display: none;">
+
+
+            <h1>User List</h1>
+            <ul id="acceptUserList" class="friendz-list">
+
+            </ul>
+
+
+
+        </div>*@
+
+                                    <div id="accepted-follower-div" style="display: none;">
+
+                                        <h5 class="f-title"><i class="fa-solid fa-user"></i>User Friend</h5>
+                                       
+                                        <ul id="acceptUserList">
+                                        </ul>
+
+
+
+                                    </div>
+
+
+                                        @* <div id="post-link" style="display: none;">
+
+
+            <h1>User Post </h1>
+
+
+            <div class="post-icon" id="post-link">
+                <h5 class="post-icon"><i class="post-item"></i>Post</h5>
+
+
+
+
+
+            </div>
+        </div>*@
+
+
+
+
+                                        <div id="post-div" style="display: none;">
+                                            <div class="Post-info" id="UserPostDiv">
+                                                <h5 class="f-title"><i class="fa-solid fa-image"></i>Post</h5>
+                                                <ul class="photos">
+                                                    <!--load dynamic post-->
+                                                </ul>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div id="archieve-div" style="display: none;">
+                                            <div class="archieve-info" id="archieveDiv">
+                                                <h5 class="f-title"><i class="fa-solid fa-box-archive"></i>archieve Photos</h5>
+                                                <ul class="photos">
+                                                    <!--load dynamic post-->
+                                                </ul>
+                                            </div>
+                                        </div>
+
+
+
+                                        @* <div id="archievelink" style="display: none;">
+
+
+            <h1>User ArchievePost </h1>
+            <ul id="archievelink">
+            </ul>
+
+
+
+        </div>*@
+
+
+
+                                        <!-- following -->
+                                        @*  <div id="following-div" style="display: none;">
+            <h1>User List</h1>
+            <ul id="userList" class="list-unstyled">
+
+            </ul>
+
+        </div>*@
+                                        <!-- end following -->
+
+
+                                    </div>
+                                </div><!-- centerl meta -->
+
+                                <div class="col-lg-3"></div><!-- sidebar -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    </section>
+
+    <!--<div class="bottombar">-->
+    @* <div class="container">
+            <div class="container">
+
+            </div>
+        </div>*@
+    <!--</div>-->
+    </div>
+
+
+    @*  <div class="section">
+            <h3>Statistics</h3>
+            <p><span class="badge">332</span> Following</p>
+            <p><span class="badge">124</span> Followers</p>
+            <p><span class="badge">620</span> Likes</p>
+        </div>*@
+
+
+
+
+
+
+
+    <!--<div class="col-md-4">
+        <div class="profile-info-right">
+            <ul class="nav nav-pills nav-pills-custom-minimal custom-minimal-bottom">-->
+    @* <li class="active"><a href="#activities" data-toggle="tab">ACTIVITIES</a></li>*@
+    @*<li><a href="#followers" data-toggle="tab">FOLLOWERS</a></li>
+        <li><a href="#following" data-toggle="tab">FOLLOWING</a></li>*@
+    <!--</ul>
+    <div class="tab-content">
+        <!-- activities -->
+    <!--@*<div class="tab-pane fade in active" id="activities">
+        <div class="media activity-item">
+            <a href="#" class="pull-left">
+                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar" class="media-object avatar">
+            </a>
+            <div class="media-body">
+                <p class="activity-title"><a href="#">Antonius</a> started following <a href="#">Jack Bay</a> <small class="text-muted">- 2m ago</small></p>
+                <small class="text-muted">Today 08:30 am - 02.05.2014</small>
+            </div>
+            <div class="btn-group pull-right activity-actions">
+                <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-th"></i>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li><a href="#">I don't want to see this</a></li>
+                    <li><a href="#">Unfollow Antonius</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Get Notification</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="media activity-item">
+            <a href="#" class="pull-left">
+                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="Avatar" class="media-object avatar">
+            </a>
+            <div class="media-body">
+                <p class="activity-title"><a href="#">Jane Doe</a> likes <a href="#">Jack Bay</a> <small class="text-muted">- 36m ago</small></p>
+                <small class="text-muted">Today 07:23 am - 02.05.2014</small>
+            </div>
+            <div class="btn-group pull-right activity-actions">
+                <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-th"></i>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li><a href="#">I don't want to see this</a></li>
+                    <li><a href="#">Unfollow Jane Doe</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Get Notification</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="media activity-item">
+            <a href="#" class="pull-left">
+                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Avatar" class="media-object avatar">
+            </a>
+            <div class="media-body">
+                <p class="activity-title"><a href="#">Michael</a> posted something for <a href="#">Jack Bay</a> <small class="text-muted">- 1h ago</small></p>
+                <small class="text-muted">Today 07:23 am - 02.05.2014</small>
+                <div class="activity-attachment">
+                    <div class="well well-sm">
+                        Professionally evolve corporate services without ethical leadership. Proactively re-engineer client-focused infrastructures before alternative potentialities. Competently predominate just in time e-tailers for leveraged solutions. Intrinsicly initiate end-to-end collaboration and idea-sharing after 24/365 ROI. Rapidiously.
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group pull-right activity-actions">
+                <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-th"></i>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li><a href="#">I don't want to see this</a></li>
+                    <li><a href="#">Unfollow Michael</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Get Notification</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="media activity-item">
+            <a href="#" class="pull-left">
+                <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="Avatar" class="media-object avatar">
+            </a>
+            <div class="media-body">
+                <p class="activity-title"><a href="#">Jack Bay</a> has uploaded two photos <small class="text-muted">- Yesterday</small></p>
+                <small class="text-muted">Yesterday 06:42 pm - 01.05.2014</small>
+                <div class="activity-attachment">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="#" class="thumbnail">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Uploaded photo">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group pull-right activity-actions">
+                <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-th"></i>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li><a href="#">I don't want to see this</a></li>
+                    <li><a href="#">Unfollow Jack Bay</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Get Notification</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="media activity-item">
+            <a href="#" class="pull-left">
+                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Avatar" class="media-object avatar">
+            </a>
+            <div class="media-body">
+                <p class="activity-title"><a href="#">Jack Bay</a> has changed his profile picture <small class="text-muted">- 2 days ago</small></p>
+                <small class="text-muted">2 days ago 05:42 pm - 30.04.2014</small>
+                <div class="activity-attachment">
+                    <a href="#" class="thumbnail">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Uploaded photo">
+                    </a>
+                </div>
+            </div>
+            <div class="btn-group pull-right activity-actions">
+                <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-th"></i>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li><a href="#">I don't want to see this</a></li>
+                    <li><a href="#">Unfollow Jack Bay</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Get Notification</a></li>
+                </ul>
+            </div>
+        </div>
+        <button type="button" class="btn btn-default center-block"><i class="fa fa-refresh"></i> Load more activities</button>
+    </div>*@-->
+    <!--<!-- end activities -->
+    <!-- followers -->
+    <!--@*<div class="tab-pane fade" id="followers">
+        <div class="media user-follower">
+            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User Avatar" class="media-object pull-left">
+            <div class="media-body">
+                <a href="#">Antonius<br><span class="text-muted username">mrantonius</span></a>
+                <button type="button" class="btn btn-sm btn-toggle-following pull-right"><i class="fa fa-checkmark-round"></i> <span>Following</span></button>
+            </div>
+        </div>
+        <div class="media user-follower">
+            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="User Avatar" class="media-object pull-left">
+            <div class="media-body">
+                <a href="#">Michael<br><span class="text-muted username">iamichael</span></a>
+                <button type="button" class="btn btn-sm btn-default pull-right"><i class="fa fa-plus"></i> Follow</button>
+            </div>
+        </div>
+        <div class="media user-follower">
+            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="User Avatar" class="media-object pull-left">
+            <div class="media-body">
+                <a href="#">Stella<br><span class="text-muted username">stella</span></a>
+                <button type="button" class="btn btn-sm btn-default pull-right"><i class="fa fa-plus"></i> Follow</button>
+            </div>
+        </div>
+        <div class="media user-follower">
+            <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="User Avatar" class="media-object pull-left">
+            <div class="media-body">
+                <a href="#">Jane Doe<br><span class="text-muted username">janed</span></a>
+                <button type="button" class="btn btn-sm btn-toggle-following pull-right"><i class="fa fa-checkmark-round"></i> <span>Following</span></button>
+            </div>
+        </div>
+        <div class="media user-follower">
+            <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="User Avatar" class="media-object pull-left">
+            <div class="media-body">
+                <a href="#">John Simmons<br><span class="text-muted username">jsimm</span></a>
+                <button type="button" class="btn btn-sm btn-default pull-right"><i class="fa fa-plus"></i> Follow</button>
+            </div>
+        </div>
+        <div class="media user-follower">
+            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="User Avatar" class="media-object pull-left">
+            <div class="media-body">
+                <a href="#">Antonius<br><span class="text-muted username">mrantonius</span></a>
+                <button type="button" class="btn btn-sm btn-toggle-following pull-right"><i class="fa fa-checkmark-round"></i> <span>Following</span></button>
+            </div>
+        </div>
+        <div class="media user-follower">
+            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="User Avatar" class="media-object pull-left">
+            <div class="media-body">
+                <a href="#">Michael<br><span class="text-muted username">iamichael</span></a>
+                <button type="button" class="btn btn-sm btn-default pull-right"><i class="fa fa-plus"></i> Follow</button>
+            </div>
+        </div>
+        <div class="media user-follower">
+            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="User Avatar" class="media-object pull-left">
+            <div class="media-body">
+                <a href="#">Stella<br><span class="text-muted username">stella</span></a>
+                <button type="button" class="btn btn-sm btn-default pull-right"><i class="fa fa-plus"></i> Follow</button>
+            </div>
+        </div>
+        <div class="media user-follower">
+            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User Avatar" class="media-object pull-left">
+            <div class="media-body">
+                <a href="#">Jane Doe<br><span class="text-muted username">janed</span></a>
+                <button type="button" class="btn btn-sm btn-toggle-following pull-right"><i class="fa fa-checkmark-round"></i> <span>Following</span></button>
+            </div>
+        </div>
+        <div class="media user-follower">
+            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="User Avatar" class="media-object pull-left">
+            <div class="media-body">
+                <a href="#">John Simmons<br><span class="text-muted username">jsimm</span></a>
+                <button type="button" class="btn btn-sm btn-default pull-right"><i class="fa fa-plus"></i> Follow</button>
+            </div>
+        </div>
+    </div>*@-->
+    <!-- end followers -->
+    <!-- following -->
+    <!--<div class="tab-pane fade" id="following">
+        <div class="media user-following">
+            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User Avatar" class="media-object pull-left">
+            <div class="media-body">
+                <a href="#">Stella<br><span class="text-muted username">stella</span></a>
+                <button type="button" class="btn btn-sm btn-danger pull-right"><i class="fa fa-close-round"></i> Unfollow</button>
+            </div>
+        </div>
+        <div class="media user-following">
+            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="User Avatar" class="media-object pull-left">
+            <div class="media-body">
+                <a href="#">Jane Doe<br><span class="text-muted username">janed</span></a>
+                <button type="button" class="btn btn-sm btn-danger pull-right"><i class="fa fa-close-round"></i> Unfollow</button>
+            </div>
+        </div>
+        <div class="media user-following">
+            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="User Avatar" class="media-object pull-left">
+            <div class="media-body">
+                <a href="#">John Simmons<br><span class="text-muted username">jsimm</span></a>
+                <button type="button" class="btn btn-sm btn-danger pull-right"><i class="fa fa-close-round"></i> Unfollow</button>
+            </div>
+        </div>
+        <div class="media user-following">
+            <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="User Avatar" class="media-object pull-left">
+            <div class="media-body">
+                <a href="#">Antonius<br><span class="text-muted username">mrantonius</span></a>
+                <button type="button" class="btn btn-sm btn-danger pull-right"><i class="fa fa-close-round"></i> Unfollow</button>
+            </div>
+        </div>
+        <div class="media user-following">
+            <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="User Avatar" class="media-object pull-left">
+            <div class="media-body">
+                <a href="#">Michael<br><span class="text-muted username">iamichael</span></a>
+                <button type="button" class="btn btn-sm btn-danger pull-right"><i class="fa fa-close-round"></i> Unfollow</button>
+            </div>
+        </div>
+        <div class="media user-following">
+            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="User Avatar" class="media-object pull-left">
+            <div class="media-body">
+                <a href="#">Stella<br><span class="text-muted username">stella</span></a>
+                <button type="button" class="btn btn-sm btn-danger pull-right"><i class="fa fa-close-round"></i> Unfollow</button>
+            </div>
+        </div>
+    </div>-->
+    <!-- end following -->
+    <!--</div>
+        </div>
+
+
+    </div>-->
+
+    <script src="~/JavaScript/main.min.js"></script>
+    <script src="~/JavaScript/script.js"></script>
+    <script src="https://kit.fontawesome.com/740b3d7ee7.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
